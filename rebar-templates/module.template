@@ -1,0 +1,18 @@
+%% basic definition of variables
+{variables,[
+            {name, "app_name"},
+            {app_dir, "."},
+            {copyright_year, "2012"},
+            {github_account, "andrzejsliwa"},
+            {author_name, "Andrzej Sliwa"},
+            {author_email,"andrzej.sliwa@i-tool.eu"}
+           ]}.
+
+%% make dirs
+{dir, "{{app_dir}}/src"}.
+{dir, "{{app_dir}}/test"}.
+
+%% generate files (render variables)
+{template, "module/module.erl", "{{app_dir}}/src/{{name}}.erl"}.
+{template, "module/module_tests.erl", "{{app_dir}}/test/{{name}}_tests.erl"}.
+

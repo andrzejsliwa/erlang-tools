@@ -1,0 +1,11 @@
+#!/usr/bin/env escript
+main([]) ->
+    io:format("Find application name by module~n~n"),
+    io:format("Usage:~n  efind module_name~n");
+
+main([ModuleName]) ->
+    BasePath = filename:dirname(code:lib_dir(kernel)),
+    [AppPath] = filelib:wildcard(BasePath ++ "/**/**/" ++ ModuleName ++ ".erl"),
+    [_SrcFile, "src", AppNameWithVersion| _] = lists:reverse(string:tokens(AppPath, "/")),
+    [AppName| _] = string:tokens(AppNameWithVersion, "-"),
+    io:format("~s~n", [AppName]).

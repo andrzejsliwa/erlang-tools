@@ -1,0 +1,7 @@
+{ok,[[HomeDir]]} = init:get_argument(home).
+Home = fun(Path) -> HomeDir ++ Path end.
+
+code:add_pathsz([Home("/.emacs.d/personal/vendor/wrangler/ebin")]).
+code:add_pathz(Home("/.erlang-tools/ebin")).
+code:add_pathz(Home("/.erlang-tools/deps/sync/ebin")).
+code:add_pathz(Home("/.erlang-tools/deps/proper/ebin")).

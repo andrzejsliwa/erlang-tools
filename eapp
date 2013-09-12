@@ -1,0 +1,19 @@
+#!/usr/bin/env escript
+main([]) ->
+    io:format("Emacs source opener for erlang application~n~n"),
+    io:format("Usage:~n  eapp [name_of_app]~n"),
+    BasePath = filename:dirname(code:lib_dir(kernel)),
+    AllPaths = filelib:wildcard(BasePath ++ "/*"),
+
+    io:format("~nAvailable apps:~n~n"),
+    lists:foreach(fun(AppPath) ->
+                          FileName = filename:basename(AppPath),
+                          [AppName|_] = string:tokens(FileName, "-"),
+                          io:format("~s ",[AppName])
+                  end, AllPaths),
+    io:format("~n");
+
+main([AppName]) ->
+    Path = code:lib_dir(list_to_atom(AppName)),
+    io:format("Emacs openning \"~s\"~n", [Path]),
+    io:format("~s", [os:cmd("e " ++ Path)]).

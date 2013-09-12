@@ -1,0 +1,13 @@
+{application,
+ erlang_tools,
+ [
+  {description, "erlang tools"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {module, [user_default]},
+  {env, []}
+ ]}.

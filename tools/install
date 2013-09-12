@@ -1,0 +1,25 @@
+#!/bin/sh
+current_dir=$PWD
+brew install erlang
+git pull
+rebar get-deps compile
+ln -snf $PWD ~/.erlang-tools
+curl -O https://raw.github.com/spawngrid/kerl/master/kerl
+chmod +x kerl
+curl https://raw.github.com/spawngrid/kerl/master/bash_completion/kerl > kerl.bash
+curl -O https://raw.github.com/wiki/rebar/rebar/rebar
+chmod +x rebar
+mkdir ~/.rebar || true
+ln -snf ~/.erlang-tools/erl_hist.config ~/erl_hist.config
+ln -snf ~/.erlang-tools/rebar-templates ~/.rebar/templates
+ln -snf ~/.erlang-tools/.erlang ~/.erlang
+grep "~/.erlang-tools/erlang-tools.bash" ~/.bashrc >/dev/null || echo "source ~/.erlang-tools/erlang-tools.bash" >> ~/.bashrc
+source ~/.erlang-tools/erlang-tools.bash
+mkdir -p ~/erlang/otp
+kerl update releases
+kerl build R14B04 r14b04
+kerl build R15B03 r15b03
+kerl build R16B01 r16b01
+kerl install r14b04 ~/erlang/otp/r14b04
+kerl install r15b03 ~/erlang/otp/r15b03
+kerl install r16b01 ~/erlang/otp/r16b01

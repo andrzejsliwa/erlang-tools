@@ -5,3 +5,4 @@ code:add_pathsz([Home("/.emacs.d/personal/vendor/wrangler/ebin")]).
 code:add_pathz(Home("/.erlang-tools/ebin")).
 code:add_pathz(Home("/.erlang-tools/deps/sync/ebin")).
 code:add_pathz(Home("/.erlang-tools/deps/proper/ebin")).
+code:ensure_loaded(user_default).
